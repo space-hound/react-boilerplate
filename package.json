@@ -4,7 +4,17 @@
 	"description": "A react app boilerplate project with webpack.",
 	"main": "index.js",
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"---------------------------1---------------------------": "--------------------------------------------------",
+		"build": "webpack --config webpack.prod.js --color --progress",
+		"build:dev": "webpack --config webpack.dev.js --color --progress",
+		"watch": "webpack serve --config webpack.dev.js",
+		"watch:prod": "webpack serve --config webpack.prod.js",
+		"---------------------------2---------------------------": "--------------------------------------------------",
+		"lint": "eslint --ext js,jsx src",
+		"lint:fix": "eslint --fix --ext js,jsx src",
+		"prettify": "prettier --check src",
+		"prettify:fix": "prettier --write src"
 	},
 	"repository": {
 		"type": "git",
