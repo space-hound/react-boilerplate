@@ -1,6 +1,6 @@
 # APP
 node_modules/
-build/
+dist/
 
 # IDE
 .idea/
