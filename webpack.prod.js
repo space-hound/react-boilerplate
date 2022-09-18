@@ -1,6 +1,6 @@
 const path = require('path');
 
-const { HashedModuleIdsPlugin } = require('webpack');
+const webpack = require('webpack');
 
 const TerserPlugin = require('terser-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -39,8 +39,15 @@ module.exports = {
 
 	devtool: 'source-map',
 
+	devServer: {
+		port: 3000,
+		hot: true,
+		open: true,
+		compress: true,
+	},
+
 	performance: {
-		hints: 'warning',
+		hints: false,
 	},
 
 	optimization: {
@@ -58,10 +65,9 @@ module.exports = {
 						comments: false,
 						ascii_only: true,
 					},
+					sourceMap: true,
 				},
 				parallel: true,
-				cache: true,
-				sourceMap: true,
 			}),
 			new CssMinimizerPlugin({
 				parallel: true,
@@ -116,7 +122,7 @@ module.exports = {
 			threshold: 10240,
 			minRatio: 0.8,
 		}),
-		new HashedModuleIdsPlugin({
+		new webpack.ids.HashedModuleIdsPlugin({
 			hashFunction: 'sha256',
 			hashDigest: 'hex',
 			hashDigestLength: 20,
@@ -174,14 +180,14 @@ module.exports = {
 				test: /\.(png|svg|jpg|jpeg|gif)$/i,
 				type: 'asset/resource',
 				generator: {
-					filename: 'images/[name].[chunkhash][ext]',
+					filename: 'images/[name].[hash][ext]',
 				},
 			},
 			{
 				test: /\.(woff|woff2|eot|ttf|otf)$/i,
 				type: 'asset/resource',
 				generator: {
-					filename: 'fonts/[name].[chunkhash][ext]',
+					filename: 'fonts/[name].[hash][ext]',
 				},
 			},
 		]
